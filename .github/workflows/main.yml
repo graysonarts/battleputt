@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Pages Deploy
+    runs-on: linux
+
+    steps:
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v4.1.0
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4.0.0
+    - name: Build
+      run: pnpm build
