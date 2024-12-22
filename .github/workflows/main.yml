@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Configure GitHub Pages
+      uses: actions/configure-pages@v5
     - name: Setup Node.js environment
       uses: actions/setup-node@v4.1.0
     - name: Setup pnpm
@@ -17,5 +19,13 @@ jobs:
         version: 9.14.2
     - name: Checkout
       uses: actions/checkout@v4.2.2
+    - name: Install Dependencies
+      run: pnpm install
     - name: Build
-      run: pnpm install && pnpm build
+      run: pnpm build
+    - name: Upload GitHub Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: dist/
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
