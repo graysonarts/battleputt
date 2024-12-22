@@ -16,4 +16,4 @@ jobs:
       with:
         version: 9.14.2
     - name: Build
-      run: pnpm build
+      run: pwd && ls && pnpm build
