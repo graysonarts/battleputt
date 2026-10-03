@@ -5,11 +5,11 @@ import "./style.css";
 import {
   initGui,
   loadControls,
-  onSpacebar,
+  onKey,
   storeControls,
   Tunables,
 } from "./controls";
-import { initTracer, renderTracer, trace, Tracer } from "./tracer";
+import { initTracer, nextShot, renderTracer, trace, Tracer } from "./tracer";
 import { createPlatformRamp, createWood, updateWoodParameters } from "./wood";
 import { BodiesMap } from "./types";
 import {
@@ -192,14 +192,14 @@ export async function game() {
     storeControls(obg.object as Tunables);
   });
 
-  onSpacebar(
+  onKey(
     () => {
       ballBody.resetForces(false);
       ballBody.resetTorques(false);
       ballBody.setAngvel(0.0, false);
       ballBody.setLinvel({ x: 0.0, y: 0.0 }, false);
       ballBody.setTranslation(initialBallPosition(), false);
-      tracer.points = [];
+      nextShot(tracer);
     },
     () => {
       ballBody.applyImpulse({ x: -tunables.forceOfPutt * 10.0, y: 0.0 }, true);

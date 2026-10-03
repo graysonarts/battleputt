@@ -71,7 +71,12 @@ export function initGui(tunables: Tunables) {
   return gui;
 }
 
-export function onSpacebar(down: () => void, up: () => void) {
+type KeyHandler = {
+  down?: () => void;
+  up?: () => void;
+};
+
+export function onKey(down: () => void, up: () => void) {
   window.addEventListener("keyup", (event) => {
     if (event.code === "Space") {
       up();
